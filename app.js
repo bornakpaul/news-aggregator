@@ -19,8 +19,8 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
 //routes
-app.use('/auth', authRoutes);
-app.use('/prefs', prefsRoutes);
+app.use('/', authRoutes);
+app.use('/', prefsRoutes);
 
 // connections
 app.listen(port, (err) => {
