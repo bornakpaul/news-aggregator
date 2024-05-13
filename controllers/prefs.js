@@ -55,16 +55,21 @@ const savePrefs = async (req, res) => {
 const fetchPrefs = async (req, res) => {
      try{
           const username = req.username;
-          const prefsObject = await Prefs.findOne({username: username});
-          if(prefsObject.prefs.length > 0){
-               res.json({username: username,prefs: prefsObject.prefs,});
-          }else{
-               res.status({username: username, prefs: []});
-          }
+          const prefs = await fetchPrefsFromDB(username);
+          res.status(200).json({username: username,prefs: prefs,});
      }catch(e){
           res.status(404).json({message: `${e}`});
      }
 
 }
 
-export {savePrefs, fetchPrefs};
+async function fetchPrefsFromDB (username) {
+     const prefsObject = await Prefs.findOne({username: username});
+     if(prefsObject.prefs.length > 0){
+          return prefsObject.prefs;
+     }else{
+          return [];
+     }
+}
+
+export {savePrefs, fetchPrefs, fetchPrefsFromDB};

@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import connectDB from './database/main.js';
 import authRoutes from './routes/auth.js';
 import prefsRoutes from "./routes/prefs.js";
+import newsRoutes from "./routes/news.js";
 
 // defining port
 const app = express();
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 //routes
 app.use('/', authRoutes);
 app.use('/', prefsRoutes);
+app.use('/', newsRoutes);
 
 // connections
 app.listen(port, (err) => {
